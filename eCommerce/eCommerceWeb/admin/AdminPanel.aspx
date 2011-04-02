@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <body>
-<h1>HALİM</h1>
+<h1 class="é">HALİM</h1>
 <h1>HALİM</h1>
 <h1>HALİM</h1>
 <h1>HALİM</h1>
