@@ -1,6 +1,0 @@
-C:\Users\Kaan\.ssh\eCommerce\eCommerce\DAL\bin\Debug\DAL.dll
-C:\Users\Kaan\.ssh\eCommerce\eCommerce\DAL\bin\Debug\DAL.pdb
-C:\Users\Kaan\.ssh\eCommerce\eCommerce\DAL\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Kaan\.ssh\eCommerce\eCommerce\DAL\obj\Debug\DAL.dll
-C:\Users\Kaan\.ssh\eCommerce\eCommerce\DAL\obj\Debug\DAL.pdb
-C:\Users\Kaan\.ssh\eCommerce\eCommerce\DAL\bin\Debug\DAL.dll.config
