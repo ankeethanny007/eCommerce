@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EBookStoreModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="EBookStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="EBookStoreModel.Author" />
+    <EntitySet Name="Baskets" EntityType="EBookStoreModel.Basket" />
+    <EntitySet Name="Books" EntityType="EBookStoreModel.Book" />
+    <EntitySet Name="Categories" EntityType="EBookStoreModel.Category" />
+    <EntitySet Name="Members" EntityType="EBookStoreModel.Member" />
+    <EntitySet Name="Orders" EntityType="EBookStoreModel.Order" />
+    <EntitySet Name="Publishers" EntityType="EBookStoreModel.Publisher" />
+    <EntitySet Name="sysdiagrams" EntityType="EBookStoreModel.sysdiagram" />
+    <AssociationSet Name="FK_Book_Author" Association="EBookStoreModel.FK_Book_Author">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Basket_Member" Association="EBookStoreModel.FK_Basket_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Basket" EntitySet="Baskets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Basket" Association="EBookStoreModel.FK_Order_Basket">
+      <End Role="Basket" EntitySet="Baskets" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Category" Association="EBookStoreModel.FK_Book_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Publisher" Association="EBookStoreModel.FK_Book_Publisher">
+      <End Role="Publisher" EntitySet="Publishers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="BasketDetails" Association="EBookStoreModel.BasketDetails">
+      <End Role="Basket" EntitySet="Baskets" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorFirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AuthorLastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Books" Relationship="EBookStoreModel.FK_Book_Author" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Basket">
+    <Key>
+      <PropertyRef Name="BasketID" />
+    </Key>
+    <Property Name="BasketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="EBookStoreModel.FK_Basket_Member" FromRole="Basket" ToRole="Member" />
+    <NavigationProperty Name="Orders" Relationship="EBookStoreModel.FK_Order_Basket" FromRole="Basket" ToRole="Order" />
+    <NavigationProperty Name="Books" Relationship="EBookStoreModel.BasketDetails" FromRole="Basket" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISBN" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AuthorID" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Circulation" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="IsDiscount" Type="Boolean" />
+    <Property Name="DiscountRate" Type="Int32" />
+    <Property Name="Detail" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="MinAge" Type="Int32" />
+    <Property Name="PictureUrl" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="AddedDate" Type="DateTime" />
+    <Property Name="SalesAmount" Type="Int32" />
+    <Property Name="PublisherID" Type="Int32" />
+    <NavigationProperty Name="Author" Relationship="EBookStoreModel.FK_Book_Author" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="Category" Relationship="EBookStoreModel.FK_Book_Category" FromRole="Book" ToRole="Category" />
+    <NavigationProperty Name="Publisher" Relationship="EBookStoreModel.FK_Book_Publisher" FromRole="Book" ToRole="Publisher" />
+    <NavigationProperty Name="Baskets" Relationship="EBookStoreModel.BasketDetails" FromRole="Book" ToRole="Basket" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Books" Relationship="EBookStoreModel.FK_Book_Category" FromRole="Category" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Adress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Baskets" Relationship="EBookStoreModel.FK_Basket_Member" FromRole="Member" ToRole="Basket" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" />
+    <Property Name="DeliveryDate" Type="DateTime" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="BasketID" Type="Int32" />
+    <NavigationProperty Name="Basket" Relationship="EBookStoreModel.FK_Order_Basket" FromRole="Order" ToRole="Basket" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="PublisherID" />
+    </Key>
+    <Property Name="PublisherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PublisherName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Books" Relationship="EBookStoreModel.FK_Book_Publisher" FromRole="Publisher" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Book_Author">
+    <End Role="Author" Type="EBookStoreModel.Author" Multiplicity="1" />
+    <End Role="Book" Type="EBookStoreModel.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Basket_Member">
+    <End Role="Member" Type="EBookStoreModel.Member" Multiplicity="1" />
+    <End Role="Basket" Type="EBookStoreModel.Basket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Basket">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Basket">
+    <End Role="Basket" Type="EBookStoreModel.Basket" Multiplicity="0..1" />
+    <End Role="Order" Type="EBookStoreModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Basket">
+        <PropertyRef Name="BasketID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="BasketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Category">
+    <End Role="Category" Type="EBookStoreModel.Category" Multiplicity="1" />
+    <End Role="Book" Type="EBookStoreModel.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Publisher">
+    <End Role="Publisher" Type="EBookStoreModel.Publisher" Multiplicity="0..1" />
+    <End Role="Book" Type="EBookStoreModel.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="PublisherID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="PublisherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BasketDetails">
+    <End Role="Basket" Type="EBookStoreModel.Basket" Multiplicity="*" />
+    <End Role="Book" Type="EBookStoreModel.Book" Multiplicity="*" />
+  </Association>
+</Schema>

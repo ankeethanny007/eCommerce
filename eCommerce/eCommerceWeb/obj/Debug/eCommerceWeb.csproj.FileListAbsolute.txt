@@ -1,0 +1,5 @@
+C:\Users\Kaan\.ssh\eCommerce\eCommerce\eCommerceWeb\bin\eCommerceWeb.dll
+C:\Users\Kaan\.ssh\eCommerce\eCommerce\eCommerceWeb\bin\eCommerceWeb.pdb
+C:\Users\Kaan\.ssh\eCommerce\eCommerce\eCommerceWeb\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kaan\.ssh\eCommerce\eCommerce\eCommerceWeb\obj\Debug\eCommerceWeb.dll
+C:\Users\Kaan\.ssh\eCommerce\eCommerce\eCommerceWeb\obj\Debug\eCommerceWeb.pdb
